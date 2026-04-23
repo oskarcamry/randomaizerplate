@@ -1,0 +1,240 @@
+:root {
+    --accent: #00f2ff;
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: #020205;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+/* Фоны и свечение */
+.bg-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, #1a1a3a 0%, #020205 100%);
+    z-index: -2;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: move 20s infinite alternate;
+}
+
+.c1 { width: 400px; height: 400px; background: rgba(0, 242, 255, 0.1); top: 10%; left: 10%; }
+.c2 { width: 500px; height: 500px; background: rgba(123, 0, 255, 0.1); bottom: 10%; right: 10%; }
+
+@keyframes move {
+    from { transform: translate(0, 0); }
+    to { transform: translate(100px, 50px); }
+}
+
+/* Карточка */
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(30px);
+    border: 1px solid var(--border);
+    padding: 60px;
+    border-radius: 40px;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+    text-align: center;
+    width: 100%;
+    max-width: 800px; /* Немного расширил, чтобы влез широкий номер */
+}
+
+.title {
+    font-weight: 400;
+    letter-spacing: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: rgba(255,255,255,0.5);
+}
+
+.title span { font-weight: 900; color: var(--accent); }
+
+/* Элементы управления */
+.controls-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    color: var(--accent);
+}
+
+select, #customRegion {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 12px 20px;
+    border-radius: 12px;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+select option {
+    background-color: #1a1a3a;
+    color: white;
+    padding: 10px;
+}
+
+select:hover { background: rgba(255,255,255,0.1); }
+
+/* ГОС НОМЕР */
+.plate-frame {
+    background: #111;
+    padding: 12px;
+    border-radius: 18px;
+    display: inline-block;
+    box-shadow: inset 0 2px 5px rgba(255,255,255,0.1), 0 20px 40px rgba(0,0,0,0.8);
+    margin-bottom: 50px;
+}
+
+.plate-body {
+    background: white;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.plate-inner {
+    border: 3px solid #000;
+    border-radius: 6px;
+    display: flex;
+    height: 120px;
+    overflow: hidden;
+    color: #000;
+    align-items: center;
+}
+
+.symbols-track { 
+    display: flex; 
+    padding: 0 5px; 
+    align-items: center;
+}
+
+/* СЛОТЫ: Разная ширина для букв и цифр */
+.slot { 
+    position: relative; 
+    height: 120px; 
+    display: flex;
+    justify-content: center;
+}
+
+.slot[data-type="char"] { width: 55px; } /* Буквы уже */
+.slot[data-type="num"] { width: 70px; }  /* Цифры шире */
+.slot:first-child { width: 70px; }       /* Первая буква обычно имеет больше воздуха */
+
+.strip {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700 !important;
+    line-height: 120px;
+}
+.item {
+    height: 120px;
+    min-height: 120px; /* Чтобы Flexbox не сжимал элементы */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Если буквы всё еще кажутся чуть выше/ниже цифр, 
+   регулируй ТОЛЬКО этот padding у букв */
+.slot[data-type="char"] .item {
+    font-size: 75px; 
+    padding-top: 10px; 
+}
+
+.slot[data-type="num"] .item {
+    font-size: 100px;
+}
+.region-separator {
+    width: 3px;
+    background: #000;
+    height: 100%;
+}
+
+.region-info {
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 80px;
+}
+
+.reg-code {
+    font-size: 60px;
+    font-weight: 700 !important;
+    line-height: 1.1;
+}
+
+.rus-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.flag {
+    width: 28px;
+    height: 16px;
+    background: linear-gradient(#fff 33%, #0039a6 33% 66%, #d52b1e 66%);
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+
+/* Кнопка */
+button {
+    background: white;
+    color: black;
+    border: none;
+    padding: 20px 60px;
+    border-radius: 100px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 242, 255, 0.3);
+    background: var(--accent);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
